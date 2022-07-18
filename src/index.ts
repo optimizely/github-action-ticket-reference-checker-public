@@ -25,12 +25,10 @@ async function run(): Promise<void> {
   try {
     // Provide complete context object right away if debugging
     debug('context', JSON.stringify(context));
-    
+
     const login = context.payload.pull_request?.user.login as string;
     const senderType = context.payload.pull_request?.user.type as string;
     const sender: string = senderType === 'Bot' ? login.replace('[bot]', '') : login;
-
-     
 
     // Debugging Entries
     debug('sender', sender);
