@@ -1,0 +1,51 @@
+{
+  "name": "ticket-reference-available",
+  "description": "Verify that your pull request has a ticket reference",
+  "version": "1.0.0",
+  "author": "M Shaharyar",
+  "license": "MIT",
+  "repository": {
+    "type": "git"
+  },
+  "main": "lib/main.js",
+  "private": true,
+  "scripts": {
+    "build": "NODE_ENV=production ncc build src/index.ts -o build --minify",
+    "format": "prettier --write **/*.ts",
+    "format:check": "prettier --check **/*.ts",
+    "lint": "eslint \"**/*.{ts,js}\"",
+    "pre-commit": "lint-staged"
+  },
+  "keywords": [
+    "actions",
+    "github",
+    "linter",
+    "node"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint"
+    ],
+    "*.{ts,js,json,yaml,yml,md}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@actions/core": "1.2.6",
+    "@actions/github": "4.0.0",
+    "@types/node": "13.11.0",
+    "@vercel/ncc": "0.25.1",
+    "eslint": "^7.32.0",
+    "eslint-config-neo": "0.5.2",
+    "husky": "^4.2.3",
+    "is-plain-object": "^5.0.0",
+    "lint-staged": "^10.1.1",
+    "prettier": "1.19.1",
+    "typescript": "3.8.3"
+  }
+}
