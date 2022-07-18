@@ -1,0 +1,31 @@
+name: 'PR Ticket Reference Available Action'
+description: 'Verify that pull request has a ticket URL'
+author: 'M Shaharyar'
+
+inputs:
+  bodyRegex:
+    description: 'The regular expression used to search the body for a shorthand reference'
+    default: '(CH)(-?)(?<ticketNumber>\d{3,})'
+    required: true
+
+  bodyRegexFlags:
+    description: 'The flags applied to the body regular expression when searching for a shorthand reference'
+    default: 'gim'
+    required: true
+
+  bodyURLRegex:
+    description: 'The regular expression used to search the body for a URL reference'
+    required: false
+
+  bodyURLRegexFlags:
+    description: 'The flags applied to the body regular expression when searching for a URL reference'
+    default: 'gim'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'build/index.js'
+
+branding:
+  icon: 'git-pull-request'
+  color: 'blue'
