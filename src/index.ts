@@ -55,7 +55,7 @@ async function run(): Promise<void> {
     const bodyURLRegexBase = getInput('bodyURLRegex', { required: false });
 
     if (!bodyURLRegexBase) {
-      debug('failure', 'Body do not contain a reference to a ticket, and no body URL regex was set');
+      debug('warn', 'Body do not contain a reference to a ticket, and no body URL regex was set');
       // setFailed('No ticket was referenced in this pull request');
       // return;
     }
@@ -70,8 +70,9 @@ async function run(): Promise<void> {
       debug('success', 'Body contains a ticket URL');
       const id = extractId(bodyURLCheck[0]);
       if (id === null) {
-        setFailed('Could not extract a ticket URL from the body');
-        return;
+        debug('warn', 'Could not extract a ticket URL from the body');
+        // setFailed('Could not extract a ticket URL from the body');
+        // return;
       }
     }
 
