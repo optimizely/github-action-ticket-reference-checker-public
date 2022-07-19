@@ -76,6 +76,8 @@ async function run(): Promise<void> {
       }
     }
 
+    debug('bodyCheck', bodyCheck?.length ? bodyCheck.toString() : 'bodyCheck is null');
+
     if (bodyCheck === null && bodyURLCheck === null) {
       debug('failure', 'Title, branch, and body do not contain a reference to a ticket');
       setFailed('No ticket was referenced in this pull request');
