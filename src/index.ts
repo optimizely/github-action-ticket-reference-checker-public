@@ -77,6 +77,7 @@ async function run(): Promise<void> {
     }
 
     debug('bodyCheck res', JSON.stringify(bodyCheck));
+    debug('bodyURLCheck res', JSON.stringify(bodyURLCheck));
 
     if (bodyCheck == null && bodyURLCheck == null) {
       debug('failure', 'Title, branch, and body do not contain a reference to a ticket');
