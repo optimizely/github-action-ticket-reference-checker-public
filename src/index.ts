@@ -56,8 +56,8 @@ async function run(): Promise<void> {
 
     if (!bodyURLRegexBase) {
       debug('failure', 'Body do not contain a reference to a ticket, and no body URL regex was set');
-      setFailed('No ticket was referenced in this pull request');
-      return;
+      // setFailed('No ticket was referenced in this pull request');
+      // return;
     }
 
     const bodyURLRegexFlags = getInput('bodyURLRegexFlags', {
