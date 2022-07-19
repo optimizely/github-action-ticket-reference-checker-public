@@ -29,7 +29,7 @@ async function run(): Promise<void> {
     const login = context.payload.pull_request?.user.login as string;
     const senderType = context.payload.pull_request?.user.type as string;
     const sender: string = senderType === 'Bot' ? login.replace('[bot]', '') : login;
-
+    let ticketId: string | null = null;
     // Debugging Entries
     debug('sender', sender);
     debug('sender type', senderType);
@@ -67,19 +67,19 @@ async function run(): Promise<void> {
     const bodyURLCheck = bodyURLRegex.exec(body);
 
     if (bodyURLCheck !== null) {
-      debug('success', 'Body contains a ticket URL');
-      const id = extractId(bodyURLCheck[0]);
-      if (id === null) {
+      debug('success', 'Body contains something');
+      ticketId = extractId(bodyURLCheck[0]);
+      if (ticketId === null && bodyURLRegexBase) {
         debug('warn', 'Could not extract a ticket URL from the body');
-        // setFailed('Could not extract a ticket URL from the body');
-        // return;
+        setFailed('Could not extract a ticket URL from the body');
+        return;
       }
     }
 
     debug('bodyCheck res', JSON.stringify(bodyCheck));
     debug('bodyURLCheck res', JSON.stringify(bodyURLCheck));
 
-    if (bodyCheck == null && bodyURLCheck == null) {
+    if (bodyCheck == null && (bodyURLCheck == null || ticketId == null)) {
       debug('failure', 'Title, branch, and body do not contain a reference to a ticket');
       setFailed('No ticket was referenced in this pull request');
       return;
