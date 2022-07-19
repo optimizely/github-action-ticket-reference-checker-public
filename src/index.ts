@@ -78,9 +78,10 @@ async function run(): Promise<void> {
 
     debug('bodyCheck res', JSON.stringify(bodyCheck));
     debug('bodyURLCheck res', JSON.stringify(bodyURLCheck));
+    debug('ticketId res', JSON.stringify(ticketId));
 
     if (bodyCheck == null && (bodyURLCheck == null || ticketId == null)) {
-      debug('failure', 'Title, branch, and body do not contain a reference to a ticket');
+      debug('failure', 'Body do not contain a reference to a ticket');
       setFailed('No ticket was referenced in this pull request');
       return;
     }
